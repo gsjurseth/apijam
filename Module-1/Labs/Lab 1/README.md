@@ -15,52 +15,33 @@ On Apigee, the API Proxy is also where runtime policy configuration is applied f
 
 ![Image of Apigee Proxy flow execution order](./media/ProxyToBackendWithFlows_v3.png)
 
-Apigee also supports the [**OpenAPI specification**](https://github.com/OAI/OpenAPI-Specification) out of the box, allowing you to auto-generate API Proxies. Apigee has a built-in OpenAPI specification editor and store which you can use to design and maintain your OpenAPI specifications.
+Apigee also supports the [**OpenAPI specification**](https://github.com/OAI/OpenAPI-Specification) out of the box, allowing you to auto-generate API Proxies. 
 
-![Image of Apigee OpenAPI Spec editor](./media/OASEditor.png)
-
-In this lab, we will learn how to
-* design an OpenAPI specification for an existing HTTP service and store it within the Apigee platform, and
+In this lab, we will 
+* View an OpenAPI specification for an existing HTTP service, and
 * create an API proxy that routes inbound requests to an existing HTTP service.
 
 # Pre-requisites
 
 * Basic understanding of [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification) (FKA: Swagger)
-* Access to an HTTP client to test the API (eg. cURL, Postman, etc.). If you do not have access to one, you can use the [Apigee Trace Tool](https://docs.apigee.com/api-platform/debug/using-trace-tool-0) or the [Apigee REST client](https://apigee-restclient.appspot.com/).
+* Access to an HTTP client to test the API (eg. cURL, Postman, Hoppscotch, etc.). If you do not have access to one, you can use the [Apigee Trace Tool](https://docs.apigee.com/api-platform/debug/using-trace-tool-0).
 
 # Instructions
 
 **Note: During this workshop, as you may be working within an [Apigee Organization (Org)](https://docs.apigee.com/api-platform/fundamentals/apigee-edge-organization-structure) that is shared by multiple users.  Please prefix all asset names within the Org with your initials. For example, Spec name = {your-initials}\_{spec name}, API proxy name = {your-initials}\_{proxy name}, etc.**
 
-## Create an OpenAPI Specification
+## View an OpenAPI Specification
 
 During the course of this lab, the sample HTTP service we will expose as an API endpoint is the Hipster Products service located at [http://cloud.hipster.s.apigee.com/products](http://cloud.hipster.s.apigee.com/products).
-First, we are going to design and create an OpenAPI specification for the different resource endpoints, i.e. /products and /products/{productId}.
+First, we are going to view the OpenAPI specification for the different resource endpoints, i.e. /products and /products/{productId}.
 
-1. Go to [https://apigee.com/edge](https://apigee.com/edge) and log in. This is the Apigee management UI.
-
-2. Select **Develop → Specs** in the side navigation menu
-
-![Image describing how to navigate to Apigee OpenAPI Spec editor using menu. Home - Develop - Specs](./media/image_0.png)
-
-3. As we have a pre-designed sample of the spec available for this lab, we will be importing it into your Apigee Org's Spec Store. Click **+Spec**. Click on **Import URL** to add a new spec from existing source.
-
-![Image describing how to import an OpenAPI Spec into Apigee via URL](./media/image_1.png)
-
-4. Enter spec details. Replace **{your-initials}** with the initials of your name.
-
-   * File Name: **{your-initials}**_hipster_products_api_spec
-   * URL: [https://raw.githubusercontent.com/apigee/apijam/master/Module-1/Resources/products-catalog-spec.yaml](https://raw.githubusercontent.com/apigee/apijam/master/Module-1/Resources/products-catalog-spec.yaml)
-
-![Image describing the Import OpenAPI Spec wizard fields](./media/image_2.png)
-
-5. Verify the values and click **Import**. Spec has been imported into Apigee and is ready to use. You should see your spec in the list. For example,
-
-![Image showing newly imported OpenAPI Spec in the Specs view](./media/image_3.png)
-
-6. Click on **{your-initials}**\_hipster_products_api_spec from the list to access the OpenAPI spec editor & interactive documentation that lists API details & API Resources.
-
-![Image of OpenAPI Spec editor.  Newly imported spec is loaded in the editor](./media/image_4.png)
+1. Go to URL: [https://raw.githubusercontent.com/apigee/apijam/master/Module-1/Resources/products-catalog-spec.yaml](https://raw.githubusercontent.com/apigee/apijam/master/Module-1/Resources/products-catalog-spec.yaml)
+2. Here you can see the raw yaml for the service which we'll be generating in the next step.
+  * version 2.0
+  * host
+  * basePath
+  * Paths and Verbs
+  * Responses and Definitions
 
 ## Create an API Proxy
 
@@ -76,9 +57,7 @@ First, we are going to design and create an OpenAPI specification for the differ
 
 ![Image showing selection of API Proxy type.  User has selected Reverse Proxy and clicked "Use OpenAPI Spec"](./media/image_7.png)
 
-4. You should see a popup with list of Specs. Select **{your-initials}**\_hipster_products_api_spec and click **Select.**
-
-![Image showing selection of previously imported OpenAPI Spec from list of available specs.](./media/image_8.png)
+4. Use the url from above here to have apigee ipmort your spec
 
 5. Enter details in the proxy wizard. Replace **{your-initials}** with the initials of your name.
 
